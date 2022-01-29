@@ -1,0 +1,58 @@
+<%- include ../layouts/cabecera.ejs %>
+<br />
+<br />
+<a href="/vehiculos/crear" class="btn btn-primary" type="button"
+  >Registrar nuevo vehículo</a
+>
+<br />
+<br />
+<h1 class="d-flex justify-content-center">Vehículos</h1>
+<table class="table table-light">
+  <thead class="thead-light">
+    <tr>
+      <th>#</th>
+      <th>Placa</th>
+      <th>Tipo de Vehículo</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for( let vehiculo = 0; vehiculo < vehiculos.length; vehiculo++ ) {%>
+    <tr>
+      <td><%= vehiculos[vehiculo].id %></td>
+      <td><%= vehiculos[vehiculo].placa %></td>
+      <td><%= vehiculos[vehiculo].tipo_vehiculo %></td>
+      <td>
+        <div
+          class="btn-group-vertical"
+          role="group"
+          aria-label="Vertical button group"
+        >
+          <form
+            class="form-inline"
+            method="post"
+            action="/vehiculos/editar/<%= vehiculos[vehiculo].id  %> "
+          >
+            <button class="btn btn-primary" type="submit">Editar</button>
+          </form>
+        </div>
+        <div
+          class="btn-group-vertical"
+          role="group"
+          aria-label="Vertical button group"
+        >
+          <form
+            class="form-inline"
+            method="post"
+            action="/vehiculos/eliminar/<%= vehiculos[vehiculo].id  %> "
+          >
+            <button class="btn btn-danger" type="submit">Borrar</button>
+          </form>
+        </div>
+      </td>
+    </tr>
+    <% } %>
+  </tbody>
+</table>
+
+<%- include ../layouts/pie.ejs %>
