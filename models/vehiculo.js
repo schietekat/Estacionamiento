@@ -9,4 +9,17 @@ module.exports = {
       funcion
     );
   },
+  retornarDatosID: function (conexion, id, funcion) {
+    conexion.query("SELECT * FROM vehiculos where id=?", [id], funcion);
+  },
+  borrar: function (conexion, id, funcion) {
+    conexion.query("DELETE FROM vehiculos where id=?", [id], funcion);
+  },
+  actualizar: function (conexion, datos, funcion) {
+    conexion.query(
+      "UPDATE vehiculos SET placa=? ,tipo_vehiculo=? WHERE id =?",
+      [datos.placa, datos.tipo_vehiculo, datos.id],
+      funcion
+    );
+  },
 };

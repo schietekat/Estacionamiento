@@ -1,9 +1,17 @@
 <%- include ../layouts/cabecera.ejs %>
-<h1 class="d-flex justify-content-center">Registar un nuevo vehículo</h1>
-<form method="post" action="/vehiculos">
+
+<h1 class="d-flex justify-content-center">Editar</h1>
+<form method="post" action="../actualizar">
+  <input type="hidden" name="id" value="<%= vehiculo.id  %> " />
   <div class="form-group">
     <label for="my-input">Introduzca la Placa: </label>
-    <input id="my-input" class="form-control" type="text" name="placa" />
+    <input
+      id="my-input"
+      value="<%= vehiculo.placa %> "
+      class="form-control"
+      type="text"
+      name="placa"
+    />
   </div>
   <div class="form-group">
     <label for="my-select">Seleccione el Tipo de Vehiculo:</label>
