@@ -1,0 +1,74 @@
+<%- include ../layouts/cabecera.ejs %>
+<br />
+<br />
+<a href="/estancias/crear" class="btn btn-primary" type="button"
+  >Registrar una estancia</a
+>
+<br />
+<br />
+<h1 class="d-flex justify-content-center">Estancias</h1>
+<table class="table table-light table-striped table-bordered table-hover">
+  <thead class="thead-light">
+    <tr>
+      <th>#</th>
+      <th>Vehiculo</th>
+      <th>Tipo vehiculo</th>
+      <th>Hora de inicio</th>
+      <th>Hora de salida</th>
+      <th>Costo</th>
+      <th>Pagado</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for( let estancia = 0; estancia < estancias.length; estancia++ ) {%>
+    <tr>
+      <td><%= estancias[estancia].id %></td>
+      <td><%= estancias[estancia].placa %></td>
+      <td><%= estancias[estancia].tipo_vehiculo %></td>
+      <td><%= moment( estancias[estancia].hora_inicio).format("LTS") %></td>
+      <td>
+        <% if (estancias[estancia].hora_salida==null) { %> -- Sin salir -- <% }
+        else { %> <%= moment(
+        estancias[estancia].hora_salida).format("LTS")%> <% } %>
+      </td>
+      <td>$ <%= estancias[estancia].costo %></td>
+      <td>
+        <% if (estancias[estancia].cobro==0) { %> -- no -- <% } else { %> SI <%
+        } %>
+      </td>
+
+      <td>
+        <div
+          class="btn-group-vertical"
+          role="group"
+          aria-label="Vertical button group"
+        >
+          <form
+            class="form-inline"
+            method="get"
+            action="/estancias/editar/<%= estancias[estancia].id  %> "
+          >
+            <button class="btn btn-primary" type="submit">Editar</button>
+          </form>
+        </div>
+        <div
+          class="btn-group-vertical"
+          role="group"
+          aria-label="Vertical button group"
+        >
+          <form
+            class="form-inline"
+            method="post"
+            action="/estancias/eliminar/<%= estancias[estancia].id  %> "
+          >
+            <button class="btn btn-danger" type="submit">Borrar</button>
+          </form>
+        </div>
+      </td>
+    </tr>
+    <% } %>
+  </tbody>
+</table>
+
+<%- include ../layouts/pie.ejs %>
